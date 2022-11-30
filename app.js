@@ -18,11 +18,13 @@ const monster = {
 
 // get random dice rolls array
 function getDiceRollArray(diceCount) {
-  let newDiceRolls = [];
-  for (let i = 0; i < diceCount; i++) {
-    newDiceRolls.push(Math.floor(Math.random() * 6) + 1); // generate random rolls, 1-6
-  }
-  return newDiceRolls;
+  // let newDiceRolls = [];
+  // for (let i = 0; i < diceCount; i++) {
+  //   newDiceRolls.push(Math.floor(Math.random() * 6) + 1); // generate random rolls, 1-6
+  // }
+  // return newDiceRolls;
+  // replace for loop with Array, fill, map chaining:
+  return new Array(diceCount).fill(0).map(() => Math.floor(Math.random() * 6) + 1);
 }
 
 // build dice roll html
