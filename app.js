@@ -16,51 +16,55 @@ const monster = {
   diceCount: 1,
 }
 
-// Character constructor
-function Character(data) {
-  this.elementId = data.elementId
-  this.name = data.name
-  this.avatar = data.avatar
-  this.health = data.health
-  this.diceCount = data.diceCount
-  // Character methods:
-  this.getCharacterHtml = function() {
-    const { elementId, name, avatar, health, diceCount } = this;
-    const diceHtml = getDiceHtml(diceCount);
-    // insert html into targeted div
-    document.getElementById(elementId).innerHTML = 
-    `<div class="character-card">
-      <h4 class="name">${name}</h4>
-      <img class="avatar" src="${avatar}"/>
-      <p class="health">health: <b>${health}</b></p>
-      <div class="dice-container">
-        ${diceHtml}
-      </div>
-    </div>`;
-  }
-}
-
-const wizard = new Character(hero);
-const orc = new Character(monster);
-
-// render charcater v2.0
-wizard.getCharacterHtml()
-orc.getCharacterHtml()
-
 // get random dice rolls array
 function getDiceRollArray(diceCount) {
   return new Array(diceCount).fill(0).map(() => Math.floor(Math.random() * 6) + 1);
 }
 
-// build dice roll html
-function getDiceHtml(diceCount) {
-  return getDiceRollArray(diceCount).map(num=> {
-    return `<div class="dice">${num}</div>`;
-  }).join(''); // eliminate commas with join
+// Character constructor v1.1
+function Character(data) {
+
+  Object.assign(this, data) // use Object.assign to properties
+  // Character methods:
+  this.getDiceHtml = function(diceCount) {
+    return getDiceRollArray(diceCount).map(num=> {
+      return `<div class="dice">${num}</div>`;
+    }).join(''); // eliminate commas with join
+  }
+  this.getCharacterHtml = function() {
+    const { elementId, name, avatar, health, diceCount } = this;
+    const diceHtml = this.getDiceHtml(diceCount);
+    // build html for the character render
+    return `
+      <div class="character-card">
+        <h4 class="name">${name}</h4>
+        <img class="avatar" src="${avatar}"/>
+        <p class="health">health: <b>${health}</b></p>
+        <div class="dice-container">
+          ${diceHtml}
+        </div>
+      </div>`;
+  }
+}
+// build characters
+const wizard = new Character(hero);
+const orc = new Character(monster);
+
+// render charcaters v2.0
+function render() {
+  document.getElementById(wizard.elementId).innerHTML = wizard.getCharacterHtml()
+  document.getElementById(orc.elementId).innerHTML = orc.getCharacterHtml()
 }
 
+render()
 
 
+// build dice roll html
+// function getDiceHtml(diceCount) {
+//   return getDiceRollArray(diceCount).map(num=> {
+//     return `<div class="dice">${num}</div>`;
+//   }).join(''); // eliminate commas with join
+// }
 
 // render character v1.0
 // function renderCharacter(data) {
