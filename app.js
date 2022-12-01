@@ -16,14 +16,39 @@ const monster = {
   diceCount: 1,
 }
 
+// Character constructor
+function Character(data) {
+  this.elementId = data.elementId
+  this.name = data.name
+  this.avatar = data.avatar
+  this.health = data.health
+  this.diceCount = data.diceCount
+  // Character methods:
+  this.getCharacterHtml = function() {
+    const { elementId, name, avatar, health, diceCount } = this;
+    const diceHtml = getDiceHtml(diceCount);
+    // insert html into targeted div
+    document.getElementById(elementId).innerHTML = 
+    `<div class="character-card">
+      <h4 class="name">${name}</h4>
+      <img class="avatar" src="${avatar}"/>
+      <p class="health">health: <b>${health}</b></p>
+      <div class="dice-container">
+        ${diceHtml}
+      </div>
+    </div>`;
+  }
+}
+
+const wizard = new Character(hero);
+const orc = new Character(monster);
+
+// render charcater v2.0
+wizard.getCharacterHtml()
+orc.getCharacterHtml()
+
 // get random dice rolls array
 function getDiceRollArray(diceCount) {
-  // let newDiceRolls = [];
-  // for (let i = 0; i < diceCount; i++) {
-  //   newDiceRolls.push(Math.floor(Math.random() * 6) + 1); // generate random rolls, 1-6
-  // }
-  // return newDiceRolls;
-  // replace for loop with Array, fill, map chaining:
   return new Array(diceCount).fill(0).map(() => Math.floor(Math.random() * 6) + 1);
 }
 
@@ -34,24 +59,22 @@ function getDiceHtml(diceCount) {
   }).join(''); // eliminate commas with join
 }
 
-// render character
-function renderCharacter(data) {
-  const { elementId, name, avatar, health, diceCount } = data; // destructure data object
-  // const diceHtml = diceRoll.map(roll => {
-  //   return `<div class="dice">${roll}</div>`
-  // }).join('');
 
-  // insert html into targeted div
-  document.getElementById(elementId).innerHTML = 
-   `<div class="character-card">
-      <h4 class="name">${name}</h4>
-      <img class="avatar" src="${avatar}"/>
-      <p class="health">health: <b>${health}</b></p>
-      <div class="dice-container">
-        ${getDiceHtml(diceCount)}
-      </div>
-    </div>`;
-}
 
-renderCharacter(hero)
-renderCharacter(monster)
+
+// render character v1.0
+// function renderCharacter(data) {
+//   const { elementId, name, avatar, health, diceCount } = data; // destructure data object
+//   document.getElementById(elementId).innerHTML = 
+//    `<div class="character-card">
+//       <h4 class="name">${name}</h4>
+//       <img class="avatar" src="${avatar}"/>
+//       <p class="health">health: <b>${health}</b></p>
+//       <div class="dice-container">
+//         ${getDiceHtml(diceCount)}
+//       </div>
+//     </div>`;
+// }
+
+// renderCharacter(hero)
+// renderCharacter(monster)
