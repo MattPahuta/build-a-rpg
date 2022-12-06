@@ -3,6 +3,10 @@ import Character from './Character.js'; // import from defualt export
 
 // attack function
 function attack() {
+  wizard.getDiceHtml()
+  orc.getDiceHtml()
+  wizard.takeDamage(orc.currentDiceScore)
+  orc.takeDamage(wizard.currentDiceScore)
   render(); // call render to get fresh dice rolls
 }
 
