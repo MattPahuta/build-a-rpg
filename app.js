@@ -8,6 +8,24 @@ function attack() {
   wizard.takeDamage(orc.currentDiceScore)
   orc.takeDamage(wizard.currentDiceScore)
   render(); // call render to get fresh dice rolls
+  if (wizard.dead || orc.dead) {
+    endGame()
+  }
+}
+
+function endGame() {
+  const endMessage = wizard.health === 0 && orc.health === 0 ? 'No victors - all creatures dead'
+    : wizard.health > 0 ? 'Wizard wins'
+    : 'Orc wins'
+
+  const endEmoji = wizard.health > 0 ? "🔮" : "☠️"
+
+  document.querySelector('.game-container').innerHTML = 
+    `<div class="end-game">
+      <h2>Game Over</h2>
+      <h3>${endMessage}</h3>
+      <p class="end-emoji">${endEmoji}</p>
+    </div>` 
 }
 
 // render charcaters v2.0
