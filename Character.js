@@ -1,10 +1,10 @@
-import { getDicePlaceholderHtml, getDiceRollArray } from './utils.js'; // import from named export
+import { getDicePlaceholderHtml, getDiceRollArray, getPercentage } from './utils.js'; // import from named export
 
-// Character constructor v1.1
+// Character constructor v2.0
 function Character(data) {
 
   Object.assign(this, data) // use Object.assign to properties
-  // Character props and methods:
+  this.maxHealth = this.health
   this.diceArray = getDicePlaceholderHtml(this.diceCount)
 
   this.getDiceHtml = function() {
@@ -23,15 +23,25 @@ function Character(data) {
     } 
   }
 
+  this.getHealthBarHtml = function() {
+    const percent = getPercentage(this.health, this.maxHealth)
+    return `
+      <div class="health-bar-outer">
+        <div class="health-bar-inner ${percent <= 25 ? "danger" : null}" style="width: ${percent}%;">
+        </div>
+      </div>`
+  }
+
   this.getCharacterHtml = function() {
     const { name, avatar, health, diceCount, diceArray } = this;
+    const healthBar = this.getHealthBarHtml();
     // const diceHtml = this.getDiceHtml(diceCount); // not needed?
-    // build html for the character render
     return `
       <div class="character-card">
         <h4 class="name">${name}</h4>
         <img class="avatar" src="${avatar}"/>
         <p class="health">health: <b>${health}</b></p>
+        ${healthBar}
         <div class="dice-container">
           ${diceArray}
         </div>
