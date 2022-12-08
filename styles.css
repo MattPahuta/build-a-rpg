@@ -82,7 +82,8 @@ main {
 
 .character-card {
   margin-top: .5rem;
-  max-width: 275px;
+  min-width: 260px;
+  max-width: 325px;
   padding: 1em;
 
   display: flex;
@@ -101,10 +102,12 @@ main {
               0px 0px 10px rgba(117,182,214,0.2);
 }
 
-@media(min-width:550px){
+@media (min-width: 550px){
+
   .character-card {
     border: 0.2rem solid #000721;
-    width:37vw;
+    /* width:37vw;
+    width: 300px; */
   }
 }
 
