@@ -3,13 +3,14 @@ import { getDicePlaceholderHtml, getDiceRollArray, getPercentage } from './utils
 // Character constructor v2.0
 function Character(data) {
 
-  Object.assign(this, data) // use Object.assign to properties
-  this.maxHealth = this.health
-  this.diceArray = getDicePlaceholderHtml(this.diceCount)
+  Object.assign(this, data); // use Object.assign to properties
+  this.maxHealth = this.health;
 
-  this.getDiceHtml = function() {
+  this.diceHtml = getDicePlaceholderHtml(this.diceCount);
+
+  this.setDiceHtml = function() {
     this.currentDiceScore = getDiceRollArray(this.diceCount)
-    this.diceArray = this.currentDiceScore.map((num) => {
+    this.diceHtml = this.currentDiceScore.map((num) => {
       return `<div class="dice">${num}</div>`
     }).join('') // eliminate commas with join
   }
@@ -24,7 +25,7 @@ function Character(data) {
   }
 
   this.getHealthBarHtml = function() {
-    const percent = getPercentage(this.health, this.maxHealth)
+    const percent = getPercentage(this.health, this.maxHealth);
     return `
       <div class="health-bar-outer">
         <div class="health-bar-inner ${percent <= 25 ? "danger" : null}" style="width: ${percent}%;">
@@ -33,9 +34,8 @@ function Character(data) {
   }
 
   this.getCharacterHtml = function() {
-    const { name, avatar, health, diceCount, diceArray } = this;
+    const { name, avatar, health, diceCount, diceHtml } = this; // ToDo: remove diceCount
     const healthBar = this.getHealthBarHtml();
-    // const diceHtml = this.getDiceHtml(diceCount); // not needed?
     return `
       <div class="character-card">
         <h4 class="name">${name}</h4>
@@ -43,7 +43,7 @@ function Character(data) {
         <p class="health">health: <b>${health}</b></p>
         ${healthBar}
         <div class="dice-container">
-          ${diceArray}
+          ${diceHtml}
         </div>
       </div>`;
   }

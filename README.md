@@ -9,6 +9,7 @@ This is a small project from the [Scrimba Frontend Developer Career Path](https:
   - [Screenshot](#screenshot)
   - [Links](#links)
 - [Built with](#built-with)
+  - [Future enhancements](#future-enhancements)
 - [Author](#author)
 
 ## Overview
@@ -36,3 +37,7 @@ Users should be able to:
 - CSS Grid
 - Mobile-first workflow
 - Splide slider library
+
+### Future enhancements
+
+- Add additonal characters, both heros and monsters
