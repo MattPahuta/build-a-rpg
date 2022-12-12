@@ -34,10 +34,10 @@ Users should be able to:
 - Semantic HTML5 markup
 - CSS custom properties
 - Flexbox
-- CSS Grid
-- Mobile-first workflow
-- Splide slider library
 
 ### Future enhancements
 
 - Add additonal characters, both heros and monsters
+- Add realistic dice
+- Score Keeping
+- Reset/Start-again button

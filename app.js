@@ -71,3 +71,27 @@ const wizard = new Character(characterData.hero); // *** ToDo: update wizard to 
 let monster = getNewMonster();
 
 render() // render the game board and initial characterss
+
+
+class AdvertisingChannel {
+  constructor(data){
+      Object.assign(this, data)
+      this.conversionRate = this.conversions / this.clicks * 100 
+  }
+
+  getAdvertisingChannel() {
+      console.log('getting data...')
+      const { site, adViews, clicks, conversions, conversionRate} = this;
+      return `
+      <div class="site-name">${site}</div>
+      <div>Views: ${adViews}</div>
+      <div>Clicks: ${clicks} </div>
+      <div>Conversions: ${conversions}</div>
+      <div>Conv. Rate: <span class="highlight"> ${conversionRate} %</span></div>  
+      `
+  }
+}
+
+const facebook = new AdvertisingChannel(adData.facebook)
+const twitter = new AdvertisingChannel(adData.twitter)
+const instagram = new AdvertisingChannel(adData.instagram)
